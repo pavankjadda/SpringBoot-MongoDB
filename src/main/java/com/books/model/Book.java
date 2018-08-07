@@ -1,6 +1,7 @@
 package com.books.model;
 
 import lombok.Data;
+import lombok.Generated;
 import org.springframework.data.annotation.Id;
 
 
@@ -8,7 +9,7 @@ import org.springframework.data.annotation.Id;
 public class Book
 {
     @Id
-    private long id;
+    private String id;
 
     private String title;
 

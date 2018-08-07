@@ -9,7 +9,7 @@ public interface BookService
 {
     List<Book> findAll();
 
-    Optional<Book> findById(Long id);
+    Optional<Book> findById(String id);
 
     Book saveAndFlush(Book book);
 
