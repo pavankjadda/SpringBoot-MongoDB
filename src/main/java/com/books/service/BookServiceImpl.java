@@ -43,4 +43,16 @@ public class BookServiceImpl    implements BookService
     {
         bookRepository.delete(book);
     }
+
+    @Override
+    public void deleteById(String id)
+    {
+        bookRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteAll()
+    {
+        bookRepository.deleteAll();
+    }
 }

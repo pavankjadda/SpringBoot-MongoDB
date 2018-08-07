@@ -13,6 +13,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Iterator;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -61,5 +62,36 @@ public class BookControllerIntegrationTest
         Book book=new Book(title,numberOfPages,cost,author);
         bookService.saveAndFlush(book);
         return book;
+    }
+
+    @Test
+    public void getBook()
+    {
+        System.out.println("Book with id: 5b68baab7ab51f15c19908c6 ==>"+bookService.findById("5b68baab7ab51f15c19908c6"));
+        System.out.println("Book with id: 0 ==> "+bookService.findById("0"));
+    }
+
+    @Test
+    public void getAllBooks()
+    {
+        List<Book>  books=bookService.findAll();
+        for (Book book : books)
+        {
+
+            System.out.println("Book: " + book);
+        }
+
+    }
+
+    @Test
+    public void deleteBookById()
+    {
+        bookService.deleteById("0");
+    }
+
+    @Test
+    public void deleteAllBooks()
+    {
+        bookService.deleteAll();
     }
 }

@@ -14,4 +14,8 @@ public interface BookService
     Book saveAndFlush(Book book);
 
     void deleteBook(Book book);
+
+    void deleteById(String id);
+
+    void deleteAll();
 }
