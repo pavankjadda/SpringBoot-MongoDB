@@ -11,7 +11,9 @@ public interface BookService
 
     Optional<Book> findById(String id);
 
-    Book saveAndFlush(Book book);
+    Book insertBook(Book book);
+
+    Book updateBook(Book book);
 
     void deleteBook(Book book);
 

@@ -53,10 +53,9 @@
                             <td>{{book.author}}</td>
                             <td class="text-center">
                                 <a href="/edit_book.html?id={{book.id}}" class='btn btn-info btn-xs' > <span class="glyphicon glyphicon-edit"></span> Edit </a>
-                                <a href="/edit_book.html?id={{book.id}}" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a>
+                                <input type="button" data-ng-click="delete_book(book.id)" name="Delete" value="Delete"  class="btn btn-danger btn-xs">
                             </td>
                         </tr>
-
                     </table>
                 </div>
             </div>

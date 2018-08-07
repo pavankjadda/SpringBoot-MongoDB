@@ -4,8 +4,8 @@ app.controller('edit_book_controller', ['$scope','$http','$location','$routePara
     $scope.validate_and_update_book=function ()
     {
         $http({
-            method : "POST",
-            url : "/books/save_book",
+            method : "PUT",
+            url : "/books/update_book",
             data: JSON.stringify({title:$scope.title, cost:$scope.cost, numberOfPages:$scope.numberOfPages,author:$scope.author})
 
     }).then(function mySuccess(response)
@@ -24,10 +24,10 @@ app.controller('edit_book_controller', ['$scope','$http','$location','$routePara
             $scope.form_error_message="Unable to save Book, Please check the information";
         });
     };
-    $scope.id=getIdFromUrl($location.absUrl());
+
     $scope.get_book_details=function ()
     {
-
+        $scope.id=getIdFromUrl($location.absUrl());
         $http({
             method : "GET",
             url : "/books/"+$scope.id

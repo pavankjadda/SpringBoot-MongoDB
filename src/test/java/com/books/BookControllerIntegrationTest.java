@@ -60,7 +60,7 @@ public class BookControllerIntegrationTest
     private Book createBook(String title, Integer numberOfPages, Double cost, String author)
     {
         Book book=new Book(title,numberOfPages,cost,author);
-        bookService.saveAndFlush(book);
+        bookService.insertBook(book);
         return book;
     }
 

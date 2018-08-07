@@ -3,6 +3,7 @@ package com.books.web;
 import com.books.model.Book;
 import com.books.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,15 +34,22 @@ public class BookController
     }
 
     @PostMapping("/books/save_book")
+    public ResponseEntity<Book> saveBook(@RequestBody Book book)
+    {
+        return ResponseEntity.ok(bookService.insertBook(book));
+    }
+
+    @PutMapping("/books/update_book")
     public ResponseEntity<Book> updateBook(@RequestBody Book book)
     {
-        return ResponseEntity.ok(bookService.saveAndFlush(book));
+        return ResponseEntity.ok(bookService.updateBook(book));
     }
 
     @DeleteMapping("/books/{id}")
-    public ResponseEntity<String> deleteBook(@PathVariable Book book)
+    public ResponseEntity<String> deleteBook(@PathVariable String id)
     {
-        return ResponseEntity.ok("Book Deleted");
+        bookService.deleteById(id);
+        return new ResponseEntity<String>("{\"result\":\"success\"}", HttpStatus.OK);
     }
 
 }

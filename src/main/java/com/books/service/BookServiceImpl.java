@@ -33,11 +33,16 @@ public class BookServiceImpl    implements BookService
     }
 
     @Override
-    public Book saveAndFlush(Book book)
+    public Book insertBook(Book book)
     {
         return bookRepository.insert(book);
     }
 
+    @Override
+    public Book updateBook(Book book)
+    {
+        return bookRepository.save(book);
+    }
     @Override
     public void deleteBook(Book book)
     {
