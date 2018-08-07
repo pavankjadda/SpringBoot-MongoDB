@@ -1,20 +1,21 @@
 var app = angular.module('edit_book', ["ngRoute"]);
-app.controller('edit_book_controller', ['$scope','$http','$location','$routeParams',function($scope,$http, $location,$routeParams)
+app.controller('edit_book_controller', ['$scope','$http','$location',function($scope,$http, $location)
 {
     $scope.validate_and_update_book=function ()
     {
         $http({
             method : "PUT",
             url : "/books/update_book",
-            data: JSON.stringify({title:$scope.title, cost:$scope.cost, numberOfPages:$scope.numberOfPages,author:$scope.author})
+            data: JSON.stringify({id:$scope.id,title:$scope.title, cost:$scope.cost, numberOfPages:$scope.numberOfPages,author:$scope.author})
 
     }).then(function mySuccess(response)
         {
             $scope.form_error=false;
             $scope.form_success=true;
             $scope.form_success_message="Book information Updated ";
-            $scope.form_success_message="";
+            $scope.form_error_message="";
             $scope.id=response.data.id;
+            location.reload()
 
         }, function myError(response)
         {
@@ -37,7 +38,7 @@ app.controller('edit_book_controller', ['$scope','$http','$location','$routePara
             $scope.form_error=false;
             $scope.form_success=false;
             $scope.id=response.data.id;
-            $scope.Title=response.data.title;
+            $scope.title=response.data.title;
             $scope.cost=response.data.cost;
             $scope.numberOfPages=response.data.numberOfPages;
             $scope.author=response.data.author;
@@ -54,8 +55,15 @@ app.controller('edit_book_controller', ['$scope','$http','$location','$routePara
     function getIdFromUrl(url)
     {
         var regex = /id=(.*)#/;
-        return regex.exec(url)[1];
+        var id=null;
+        id=regex.exec(url);
+        if(id == null)
+        {
+            regex = /id=(.*)/;
+            return regex.exec(url)[1];
+        }
 
+        return id[1];
     }
 }]);
 

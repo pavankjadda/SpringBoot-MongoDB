@@ -13,8 +13,8 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -71,6 +71,7 @@ public class BookControllerIntegrationTest
         System.out.println("Book with id: 0 ==> "+bookService.findById("0"));
     }
 
+
     @Test
     public void getAllBooks()
     {
@@ -93,5 +94,20 @@ public class BookControllerIntegrationTest
     public void deleteAllBooks()
     {
         bookService.deleteAll();
+    }
+
+    @Test
+    public void updateBook()
+    {
+        if(bookService.findById("5b69d82cbdae811dade29e31").isPresent())
+        {
+            Book book=bookService.findById("5b69d82cbdae811dade29e31").get();
+            System.out.println("Before Updating Book ==> "+book.toString());
+            book.setCost(100.99);
+            book.setNumberOfPages(1000);
+            book.setAuthor("PJ");
+            bookService.updateBook(book);
+        }
+
     }
 }
