@@ -13,8 +13,11 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -108,6 +111,50 @@ public class BookControllerIntegrationTest
             book.setAuthor("PJ");
             bookService.updateBook(book);
         }
+
+    }
+
+    @Test
+    public void insertBillionRecords()
+    {
+        List<Book>  bookList=new ArrayList<>(100000000);
+        Book book;
+        LocalDateTime startArrayListDateTime=LocalDateTime.now();
+        for(int i = 0; i< 100000000; i++)
+        {
+            book=new Book("Spring Boot Essentials",200,12.23,"Craig");
+            bookList.add(book);
+        }
+
+        Iterable<Book> booksIterable=new Iterable<Book>()
+        {
+            @Override
+            public Iterator<Book> iterator()
+            {
+                return bookList.iterator();
+            }
+        };
+
+        LocalDateTime   endArrayListDateTime=LocalDateTime.now();
+        calculateDifferenceInDates(startArrayListDateTime,endArrayListDateTime,"Time took to create Array List of billion records==> ");
+
+        LocalDateTime   startDateTime=LocalDateTime.now();
+        bookService.insertAllBooks(booksIterable);
+        LocalDateTime   endDateTime=LocalDateTime.now();
+        calculateDifferenceInDates(startDateTime,endDateTime,"Time took to insert billion records into DB ==> ");
+
+
+    }
+
+    private void calculateDifferenceInDates(LocalDateTime startDateTime, LocalDateTime endDateTime, String messsage)
+    {
+        long hours = startDateTime.until( endDateTime, ChronoUnit.HOURS);
+        long minutes = startDateTime.until( endDateTime, ChronoUnit.MINUTES);
+        long seconds=startDateTime.until(endDateTime,ChronoUnit.SECONDS);
+        long milliSeconds=startDateTime.until(endDateTime,ChronoUnit.MILLIS);
+        long microSeconds=startDateTime.until(endDateTime,ChronoUnit.MICROS);
+        long nanoSeconds=startDateTime.until(endDateTime,ChronoUnit.NANOS);
+        System.out.println(messsage+hours+" hours "+minutes+" minutes "+seconds+" seconds "+milliSeconds+" milliSeconds "+microSeconds+" microSeconds "+nanoSeconds+" nanoSeconds");
 
     }
 }

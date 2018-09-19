@@ -2,10 +2,7 @@ package com.books;
 import com.books.model.Book;
 import com.books.util.JsonUtil;
 import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.ServerAddress;
 
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 
@@ -15,14 +12,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-
-import com.mongodb.Block;
-
-import com.mongodb.client.MongoCursor;
-import static com.mongodb.client.model.Filters.*;
-import com.mongodb.client.result.DeleteResult;
-import static com.mongodb.client.model.Updates.*;
-import com.mongodb.client.result.UpdateResult;
 
 public class NonSpringDataMongoDBTest
 {
@@ -38,27 +27,19 @@ public class NonSpringDataMongoDBTest
         book.setCost(12.34);
         book.setNumberOfPages(345);
 
-        List<Document>  bookList=new ArrayList<>();
-        for (int i = 0; i< 5000000L; i++)
+        LocalDateTime   startArrayListDateTime=LocalDateTime.now();
+        List<Document>  bookList=new ArrayList<>(10000000);
+        for (int i = 0; i< 10000000L; i++)
         {
             bookList.add(Document.parse(JsonUtil.toJsonString(book)));
         }
+        LocalDateTime   endArrayListDateTime=LocalDateTime.now();
+        calculateDifferenceInDates(startArrayListDateTime,endArrayListDateTime,"Time took to create Array List of billion records==> ");
 
         LocalDateTime   startDateTime=LocalDateTime.now();
-        System.out.println("Before Inserting Million Records, Time: "+startDateTime.toString());
-
         mongoCollection.insertMany(bookList);
-
         LocalDateTime   endDateTime=LocalDateTime.now();
-        System.out.println("After Inserting Million Records, Time: "+endDateTime.toString());
-
-        long hours = startDateTime.until( endDateTime, ChronoUnit.HOURS);
-        long minutes = startDateTime.until( endDateTime, ChronoUnit.MINUTES);
-        long seconds=startDateTime.until(endDateTime,ChronoUnit.SECONDS);
-        long milliSeconds=startDateTime.until(endDateTime,ChronoUnit.MILLIS);
-        long microSeconds=startDateTime.until(endDateTime,ChronoUnit.MICROS);
-        long nanoSeconds=startDateTime.until(endDateTime,ChronoUnit.NANOS);
-        System.out.println("Time took to insert million records==> "+hours+" hours "+minutes+" minutes "+seconds+" seconds "+milliSeconds+" milliSeconds "+microSeconds+" microSeconds "+nanoSeconds+" nanoSeconds");
+        calculateDifferenceInDates(startDateTime,endDateTime,"Time took to insert billion records into DB ==> ");
 
 
         /*
@@ -69,6 +50,17 @@ public class NonSpringDataMongoDBTest
         }
         */
 
+    }
+
+    private static void calculateDifferenceInDates(LocalDateTime startDateTime,LocalDateTime endDateTime,String messsage)
+    {
+        long hours = startDateTime.until( endDateTime, ChronoUnit.HOURS);
+        long minutes = startDateTime.until( endDateTime, ChronoUnit.MINUTES);
+        long seconds=startDateTime.until(endDateTime,ChronoUnit.SECONDS);
+        long milliSeconds=startDateTime.until(endDateTime,ChronoUnit.MILLIS);
+        long microSeconds=startDateTime.until(endDateTime,ChronoUnit.MICROS);
+        long nanoSeconds=startDateTime.until(endDateTime,ChronoUnit.NANOS);
+        System.out.println(messsage+hours+" hours "+minutes+" minutes "+seconds+" seconds "+milliSeconds+" milliSeconds "+microSeconds+" microSeconds "+nanoSeconds+" nanoSeconds");
     }
 
 

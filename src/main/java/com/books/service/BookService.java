@@ -13,6 +13,8 @@ public interface BookService
 
     Book insertBook(Book book);
 
+    List<Book> insertAllBooks(Iterable<Book> book);
+
     Book updateBook(Book book);
 
     void deleteBook(Book book);

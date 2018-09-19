@@ -49,7 +49,7 @@ public class BookController
     public ResponseEntity<String> deleteBook(@PathVariable String id)
     {
         bookService.deleteById(id);
-        return new ResponseEntity<String>("{\"result\":\"success\"}", HttpStatus.OK);
+        return new ResponseEntity<>("{\"result\":\"success\"}", HttpStatus.OK);
     }
 
 }

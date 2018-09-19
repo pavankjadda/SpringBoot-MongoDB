@@ -1,7 +1,6 @@
 package com.books.model;
 
 import lombok.Data;
-import lombok.Generated;
 import org.springframework.data.annotation.Id;
 
 
