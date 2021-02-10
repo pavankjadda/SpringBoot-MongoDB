@@ -7,7 +7,7 @@ using MongoDB database.
 2. Install Eclipse or IntelliJ IDE
 3. Install [MongoDB from official docs](https://docs.mongodb.com/manual/installation/) or spin up a Docker container
 ```
-docker run -v <Local Directory>:/data/db -d mongo
+docker run -v <Local Directory>:/data/db  -p 27017:27017 -d mongo
 ```
 
 ### How to Run
