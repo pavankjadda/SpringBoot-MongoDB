@@ -1,5 +1,4 @@
-var app = angular.module('books', ["ngRoute"]);
-
+var app = angular.module('books', ['ngRoute']);
 
 app.controller('books_controller',function($scope,$http)
 {
@@ -7,7 +6,7 @@ app.controller('books_controller',function($scope,$http)
     {
         $http({
             method : "GET",
-            url : "/books"
+            url : "/book/find/all"
         }).then(function mySuccess(response)
         {
             $scope.books_data = response.data;
@@ -21,7 +20,7 @@ app.controller('books_controller',function($scope,$http)
     {
         $http({
             method : "DELETE",
-            url : "/books/"+id
+            url : "/book/find/id/"+id
         }).then(function mySuccess(response)
         {
             location.reload();

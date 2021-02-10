@@ -1,22 +1,21 @@
-var app = angular.module('edit_book', ["ngRoute"]);
+const app = angular.module('edit_book', ['ngRoute']);
 app.controller('edit_book_controller', ['$scope','$http','$location',function($scope,$http, $location)
 {
     $scope.validate_and_update_book=function ()
     {
         $http({
             method : "PUT",
-            url : "/books/update_book",
+            url : "/book/update",
             data: JSON.stringify({id:$scope.id,title:$scope.title, cost:$scope.cost, numberOfPages:$scope.numberOfPages,author:$scope.author})
 
     }).then(function mySuccess(response)
         {
             $scope.form_error=false;
             $scope.form_success=true;
-            $scope.form_success_message="Book information Updated ";
+            $scope.form_success_message="Successfully updated Book information";
             $scope.form_error_message="";
             $scope.id=response.data.id;
-            location.reload()
-
+            //location.reload()
         }, function myError(response)
         {
             $scope.form_error=true;
@@ -31,7 +30,7 @@ app.controller('edit_book_controller', ['$scope','$http','$location',function($s
         $scope.id=getIdFromUrl($location.absUrl());
         $http({
             method : "GET",
-            url : "/books/"+$scope.id
+            url : "/book/find/id/"+$scope.id
 
         }).then(function mySuccess(response)
         {

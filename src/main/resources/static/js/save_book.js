@@ -1,11 +1,11 @@
-var app = angular.module('save_book', ["ngRoute"]);
+var app = angular.module('save_book', ['ngRoute']);
 app.controller('save_book_controller', function($scope,$http,$location)
 {
     $scope.validate_and_save_book=function ()
     {
         $http({
             method : "POST",
-            url : "/books/save_book",
+            url : "/book/save",
             data: JSON.stringify({title:$scope.title, cost:$scope.cost, numberOfPages:$scope.numberOfPages,author:$scope.author})
 
     }).then(function mySuccess(response)
