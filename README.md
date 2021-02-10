@@ -3,8 +3,8 @@ BookStore Spring Boot Project that demonstrates basic CRUD (Create, Read, Write 
 using MongoDB database. 
 
 ### Prerequsites:
-1. Install [Java](http://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html)
-2. Install Eclipse or IntelliJ IDE
+1. Install Java 11
+2. Open the project in Eclipse or IntelliJ IDE
 3. Install [MongoDB from official docs](https://docs.mongodb.com/manual/installation/) or spin up a Docker container
 ```
 docker run -v <Local Directory>:/data/db  -p 27017:27017 -d mongo
