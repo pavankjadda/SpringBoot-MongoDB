@@ -80,7 +80,7 @@ app.config(function($routeProvider)
         .when("/edit_book/:id", {
             templateUrl : "../edit_book.html"
         })
-        .when("/books", {
+        .when("/pj", {
             templateUrl : "../books.html"
         });
 });

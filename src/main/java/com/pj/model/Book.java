@@ -1,4 +1,4 @@
-package com.books.model;
+package com.pj.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -9,13 +9,9 @@ public class Book
 {
     @Id
     private String id;
-
     private String title;
-
     private Integer numberOfPages;
-
     private Double cost;
-
     private String author;
 
     public Book()

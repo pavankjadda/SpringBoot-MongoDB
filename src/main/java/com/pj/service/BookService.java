@@ -1,6 +1,6 @@
-package com.books.service;
+package com.pj.service;
 
-import com.books.model.Book;
+import com.pj.model.Book;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +13,7 @@ public interface BookService
 
     Book insertBook(Book book);
 
-    List<Book> insertAllBooks(Iterable<Book> book);
+    void insertAllBooks(Iterable<Book> book);
 
     Book updateBook(Book book);
 

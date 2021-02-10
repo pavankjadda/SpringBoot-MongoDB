@@ -1,6 +1,6 @@
-package com.books;
-import com.books.model.Book;
-import com.books.util.JsonUtil;
+package com.pj;
+import com.pj.model.Book;
+import com.pj.util.JsonUtil;
 import com.mongodb.MongoClient;
 
 import com.mongodb.client.MongoDatabase;

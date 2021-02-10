@@ -1,6 +1,6 @@
-package com.books.service;
+package com.pj.service;
 
-import com.books.model.Customer;
+import com.pj.model.Customer;
 
 import java.util.List;
 

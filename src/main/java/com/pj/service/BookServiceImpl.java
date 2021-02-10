@@ -1,18 +1,20 @@
-package com.books.service;
+package com.pj.service;
 
-import com.books.model.Book;
-import com.books.repo.BookRepository;
+import com.pj.model.Book;
+import com.pj.repo.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BookServiceImpl    implements BookService
+@Transactional
+public class BookServiceImpl  implements BookService
 {
 
-    private BookRepository bookRepository;
+    private final BookRepository bookRepository;
 
     @Autowired
     public BookServiceImpl(BookRepository bookRepository)
@@ -39,9 +41,9 @@ public class BookServiceImpl    implements BookService
     }
 
     @Override
-    public List<Book> insertAllBooks(Iterable<Book> books)
+    public void insertAllBooks(Iterable<Book> books)
     {
-        return bookRepository.insert(books);
+        bookRepository.insert(books);
     }
 
     @Override

@@ -1,6 +1,6 @@
-package com.books.repo;
+package com.pj.repo;
 
-import com.books.model.Book;
+import com.pj.model.Book;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 

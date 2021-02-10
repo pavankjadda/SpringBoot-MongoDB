@@ -1,8 +1,8 @@
-package com.books;
+package com.pj;
 
-import com.books.model.Book;
-import com.books.service.BookService;
-import com.books.util.JsonUtil;
+import com.pj.model.Book;
+import com.pj.service.BookService;
+import com.pj.util.JsonUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,8 +142,6 @@ public class BookStoreH2DatabaseIntegrationTest
         bookService.insertAllBooks(booksIterable);
         LocalDateTime   endDateTime=LocalDateTime.now();
         calculateDifferenceInDates(startDateTime,endDateTime,"Time took to insert billion records into DB ==> ");
-
-
     }
 
     private void calculateDifferenceInDates(LocalDateTime startDateTime, LocalDateTime endDateTime, String messsage)

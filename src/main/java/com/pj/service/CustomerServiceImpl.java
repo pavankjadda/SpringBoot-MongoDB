@@ -1,16 +1,18 @@
-package com.books.service;
+package com.pj.service;
 
-import com.books.model.Customer;
-import com.books.repo.CustomerRepository;
+import com.pj.model.Customer;
+import com.pj.repo.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class CustomerServiceImpl implements CustomerService
 {
-    private CustomerRepository  customerRepository;
+    private final CustomerRepository  customerRepository;
 
     @Autowired
     public CustomerServiceImpl(CustomerRepository   customerRepository)

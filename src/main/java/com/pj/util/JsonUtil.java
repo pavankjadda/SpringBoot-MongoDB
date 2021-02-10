@@ -1,4 +1,4 @@
-package com.books.util;
+package com.pj.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
