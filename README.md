@@ -5,7 +5,10 @@ using MongoDB database.
 ### Prerequsites:
 1. Install [Java](http://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html)
 2. Install Eclipse or IntelliJ IDE
-3. Install [MongoDB](https://docs.mongodb.com/manual/installation/)
+3. Install [MongoDB from official docs](https://docs.mongodb.com/manual/installation/) or spin up a Docker container
+```
+docker run -v <Local Directory>:/data/db -d mongo
+```
 
 ### How to Run
 1. Download the project
