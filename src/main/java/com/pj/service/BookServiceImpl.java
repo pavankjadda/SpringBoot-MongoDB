@@ -11,61 +11,52 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class BookServiceImpl  implements BookService
-{
+public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
     @Autowired
-    public BookServiceImpl(BookRepository bookRepository)
-    {
-        this.bookRepository=bookRepository;
+    public BookServiceImpl(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
     }
 
     @Override
-    public List<Book> findAll()
-    {
+    public List<Book> findAll() {
         return bookRepository.findAll();
     }
 
     @Override
-    public Optional<Book> findById(String id)
-    {
+    public Optional<Book> findById(String id) {
         return bookRepository.findById(id);
     }
 
     @Override
-    public Book insertBook(Book book)
-    {
+    public Book insertBook(Book book) {
         return bookRepository.insert(book);
     }
 
     @Override
-    public void insertAllBooks(Iterable<Book> books)
-    {
+    public void insertAllBooks(Iterable<Book> books) {
         bookRepository.insert(books);
     }
 
     @Override
-    public Book updateBook(Book book)
-    {
+    public Book updateBook(Book book) {
         return bookRepository.save(book);
     }
+
     @Override
-    public void deleteBook(Book book)
-    {
+    public void deleteBook(Book book) {
         bookRepository.delete(book);
     }
 
     @Override
-    public void deleteById(String id)
-    {
+    public void deleteById(String id) {
         bookRepository.deleteById(id);
     }
 
     @Override
-    public void deleteAll()
-    {
+    public void deleteAll() {
         bookRepository.deleteAll();
     }
 }

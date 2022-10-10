@@ -10,31 +10,26 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CustomerServiceImpl implements CustomerService
-{
-    private final CustomerRepository  customerRepository;
+public class CustomerServiceImpl implements CustomerService {
+    private final CustomerRepository customerRepository;
 
     @Autowired
-    public CustomerServiceImpl(CustomerRepository   customerRepository)
-    {
-        this.customerRepository=customerRepository;
+    public CustomerServiceImpl(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
     @Override
-    public Customer findByFirstName(String firstName)
-    {
+    public Customer findByFirstName(String firstName) {
         return customerRepository.findByFirstName(firstName);
     }
 
     @Override
-    public List<Customer> findByLastName(String lastName)
-    {
+    public List<Customer> findByLastName(String lastName) {
         return customerRepository.findByLastName(lastName);
     }
 
     @Override
-    public Customer insert(Customer customer)
-    {
+    public Customer insert(Customer customer) {
         return customerRepository.insert(customer);
     }
 }

@@ -4,8 +4,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 
 @Data
-public class Customer
-{
+public class Customer {
     @Id
     public String id;
     public String firstName;
