@@ -1,40 +1,37 @@
 package com.pj.web;
 
 import com.pj.model.Book;
-import com.pj.service.BookService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.pj.repo.BookReactiveRepository;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /**
- * Provides API endpoints for Book operations
+ * Provides Reactive API endpoints for Book operations
  *
  * @author Pavan Kumar Jadda
  * @since 2.1.0
  */
 @RestController
-@RequestMapping("/api/v1/book")
-public class BookController {
-    private final BookService bookService;
+@RequestMapping("/api/v1/book/reactive")
+public class BookReactiveController {
+    private final BookReactiveRepository bookReactiveRepository;
 
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
+    public BookReactiveController(BookReactiveRepository bookReactiveRepository) {
+        this.bookReactiveRepository = bookReactiveRepository;
     }
 
     /**
      * Find all books
      *
-     * @return List of all books
+     * @return List of all books asynchronously
      *
      * @author Pavan Kumar Jadda
      * @since 2.1.0
      */
     @GetMapping("/find/all")
-    public ResponseEntity<List<Book>> getBooks() {
-        return ResponseEntity.ok(bookService.findAll());
+    public Flux<Book> getBooks() {
+        return bookReactiveRepository.findAll();
     }
 
     /**
@@ -48,8 +45,8 @@ public class BookController {
      * @since 2.1.0
      */
     @GetMapping("/find/id/{id}")
-    public ResponseEntity<Optional<Book>> getBookById(@PathVariable String id) {
-        return ResponseEntity.ok(bookService.findById(id));
+    public Mono<Book> getBookById(@PathVariable Long id) {
+        return bookReactiveRepository.findById(id);
     }
 
     /**
@@ -63,8 +60,8 @@ public class BookController {
      * @since 2.1.0
      */
     @PostMapping("/save")
-    public ResponseEntity<Book> saveBook(@RequestBody Book book) {
-        return ResponseEntity.ok(bookService.insertBook(book));
+    public Mono<Book> saveBook(@RequestBody Book book) {
+        return bookReactiveRepository.insert(book);
     }
 
     /**
@@ -78,10 +75,10 @@ public class BookController {
      * @since 2.1.0
      */
     @PutMapping("/update")
-    public ResponseEntity<Book> updateBook(@RequestBody Book book) {
-        return ResponseEntity.ok(bookService.updateBook(book));
+    public Mono<Book> updateBook(@RequestBody Book book) {
+        return bookReactiveRepository.insert(book);
     }
-    
+
     /**
      * Delete book by ID
      *
@@ -91,8 +88,7 @@ public class BookController {
      * @since 2.1.0
      */
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteBook(@PathVariable String id) {
-        bookService.deleteById(id);
-        return new ResponseEntity<>("{\"result\":\"success\"}", HttpStatus.OK);
+    public Mono<Void> deleteBook(@PathVariable Long id) {
+        return bookReactiveRepository.deleteById(id);
     }
 }
