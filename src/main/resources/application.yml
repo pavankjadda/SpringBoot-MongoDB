@@ -9,3 +9,4 @@ spring:
       username: root
       password: Test12345
       database: spring-boot-mongodb
+      authentication-database: admin

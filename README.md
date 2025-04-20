@@ -10,7 +10,7 @@ using MongoDB database.
 3. Install [MongoDB from official docs](https://docs.mongodb.com/manual/installation/) or spin up a Docker container
 
       ```
-      docker run  -p 27017:27017 --name mongodb -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=Test#12345 -d mongo
+      docker run  -p 27017:27017 --name mongodb -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=Test12345 -d mongo
       ```
 
 4. Create `spring-boot-mongodb` database in MongoDB
