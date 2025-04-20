@@ -1,0 +1,31 @@
+<div class="container mt-4">
+  <h2>List of Books</h2>
+  <div class="mb-3">
+    <button class="btn btn-primary" routerLink="/add-book">Add New Book</button>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Number of Pages</th>
+        <th>Cost</th>
+        <th>Author</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>{{book.id}}</td>
+        <td>{{book.title}}</td>
+        <td>{{book.numberOfPages}}</td>
+        <td>{{book.cost}}</td>
+        <td>{{book.author}}</td>
+        <td>
+          <button class="btn btn-sm btn-primary me-2" (click)="editBook(book.id!)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteBook(book.id!)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

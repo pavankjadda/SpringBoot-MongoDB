@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <h2>{{isEditMode ? 'Edit' : 'Add'}} Book</h2>
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="col-md-6">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" formControlName="title">
+      <div class="text-danger" *ngIf="bookForm.get('title')?.invalid && bookForm.get('title')?.touched">
+        Title is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="numberOfPages" class="form-label">Number of Pages</label>
+      <input type="number" class="form-control" id="numberOfPages" formControlName="numberOfPages">
+      <div class="text-danger" *ngIf="bookForm.get('numberOfPages')?.invalid && bookForm.get('numberOfPages')?.touched">
+        Number of pages must be at least 1
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="cost" class="form-label">Cost</label>
+      <input type="number" class="form-control" id="cost" formControlName="cost" step="0.01">
+      <div class="text-danger" *ngIf="bookForm.get('cost')?.invalid && bookForm.get('cost')?.touched">
+        Cost must be a positive number
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="author" class="form-label">Author</label>
+      <input type="text" class="form-control" id="author" formControlName="author">
+      <div class="text-danger" *ngIf="bookForm.get('author')?.invalid && bookForm.get('author')?.touched">
+        Author is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary me-2" [disabled]="bookForm.invalid">Save</button>
+      <button type="button" class="btn btn-secondary" routerLink="/books">Cancel</button>
+    </div>
+  </form>
+</div>
