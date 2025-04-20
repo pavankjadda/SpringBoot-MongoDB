@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -29,11 +30,26 @@ public class CustomerController {
      * @return List of all customers
      *
      * @author Pavan Kumar Jadda
-     * @since 2.1.0
+     * @since 3.0.0
      */
     @GetMapping("/find/all")
     public ResponseEntity<List<Customer>> getCustomers() {
         return ResponseEntity.ok(service.findAll());
+    }
+
+    /**
+     * Find the customer by ID
+     *
+     * @param id ID of the customer that needs to be found
+     *
+     * @return Customer matching the given ID
+     *
+     * @author Pavan Kumar Jadda
+     * @since 3.0.0
+     */
+    @GetMapping("/find/{id}")
+    public ResponseEntity<Optional<Customer>> getById(@PathVariable String id) {
+        return ResponseEntity.ok(service.getById(id));
     }
 
     /**

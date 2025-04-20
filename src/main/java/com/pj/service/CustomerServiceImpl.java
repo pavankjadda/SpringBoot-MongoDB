@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Service class that handles business logic to get, create, update Customers
@@ -22,6 +23,21 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     public CustomerServiceImpl(CustomerRepository repository) {
         this.repository = repository;
+    }
+
+    /**
+     * Find the customer by ID
+     *
+     * @param id ID of the customer that needs to be found
+     *
+     * @return Customer matching the given ID
+     *
+     * @author Pavan Kumar Jadda
+     * @since 3.0.0
+     */
+    @Override
+    public Optional<Customer> getById(String id) {
+        return repository.findById(id);
     }
 
     /**

@@ -3,8 +3,21 @@ package com.pj.service;
 import com.pj.model.Customer;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CustomerService {
+
+    /**
+     * Find the customer by ID
+     *
+     * @param id ID of the customer that needs to be found
+     *
+     * @return Customer matching the given ID
+     *
+     * @author Pavan Kumar Jadda
+     * @since 3.0.0
+     */
+    Optional<Customer> getById(String id);
 
     /**
      * Find all customers
