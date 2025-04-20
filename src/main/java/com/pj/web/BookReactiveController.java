@@ -15,10 +15,10 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/api/v1/book/reactive")
 public class BookReactiveController {
-    private final BookReactiveRepository bookReactiveRepository;
+    private final BookReactiveRepository repository;
 
-    public BookReactiveController(BookReactiveRepository bookReactiveRepository) {
-        this.bookReactiveRepository = bookReactiveRepository;
+    public BookReactiveController(BookReactiveRepository repository) {
+        this.repository = repository;
     }
 
     /**
@@ -31,7 +31,7 @@ public class BookReactiveController {
      */
     @GetMapping("/find/all")
     public Flux<Book> getBooks() {
-        return bookReactiveRepository.findAll();
+        return repository.findAll();
     }
 
     /**
@@ -46,7 +46,7 @@ public class BookReactiveController {
      */
     @GetMapping("/find/id/{id}")
     public Mono<Book> getBookById(@PathVariable Long id) {
-        return bookReactiveRepository.findById(id);
+        return repository.findById(id);
     }
 
     /**
@@ -61,7 +61,7 @@ public class BookReactiveController {
      */
     @PostMapping("/save")
     public Mono<Book> saveBook(@RequestBody Book book) {
-        return bookReactiveRepository.insert(book);
+        return repository.insert(book);
     }
 
     /**
@@ -76,7 +76,7 @@ public class BookReactiveController {
      */
     @PutMapping("/update")
     public Mono<Book> updateBook(@RequestBody Book book) {
-        return bookReactiveRepository.insert(book);
+        return repository.insert(book);
     }
 
     /**
@@ -89,6 +89,6 @@ public class BookReactiveController {
      */
     @DeleteMapping("/delete/{id}")
     public Mono<Void> deleteBook(@PathVariable Long id) {
-        return bookReactiveRepository.deleteById(id);
+        return repository.deleteById(id);
     }
 }

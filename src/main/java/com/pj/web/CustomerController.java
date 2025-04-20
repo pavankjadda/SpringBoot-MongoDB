@@ -2,7 +2,6 @@ package com.pj.web;
 
 import com.pj.model.Customer;
 import com.pj.service.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,11 +17,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/customer")
 public class CustomerController {
-    private final CustomerService customerService;
+    private final CustomerService service;
 
-    @Autowired
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
+    public CustomerController(CustomerService service) {
+        this.service = service;
     }
 
     /**
@@ -37,7 +35,7 @@ public class CustomerController {
      */
     @GetMapping("/find/first_name/{firstName}")
     public ResponseEntity<Customer> findByFirstName(@PathVariable String firstName) {
-        return ResponseEntity.ok(customerService.findByFirstName(firstName));
+        return ResponseEntity.ok(service.findByFirstName(firstName));
     }
 
     /**
@@ -52,7 +50,7 @@ public class CustomerController {
      */
     @GetMapping("/find/last_name/{lastName}")
     public ResponseEntity<List<Customer>> findByLastName(@PathVariable String lastName) {
-        return ResponseEntity.ok(customerService.findByLastName(lastName));
+        return ResponseEntity.ok(service.findByLastName(lastName));
     }
 
     /**
@@ -67,7 +65,6 @@ public class CustomerController {
      */
     @PostMapping("/save")
     public ResponseEntity<Customer> saveCustomer(@RequestBody Customer customer) {
-        return ResponseEntity.ok(customerService.insert(customer));
+        return ResponseEntity.ok(service.insert(customer));
     }
 }
-

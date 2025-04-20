@@ -18,10 +18,10 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/book")
 public class BookController {
-    private final BookService bookService;
+    private final BookService service;
 
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
+    public BookController(BookService service) {
+        this.service = service;
     }
 
     /**
@@ -34,7 +34,7 @@ public class BookController {
      */
     @GetMapping("/find/all")
     public ResponseEntity<List<Book>> getBooks() {
-        return ResponseEntity.ok(bookService.findAll());
+        return ResponseEntity.ok(service.findAll());
     }
 
     /**
@@ -49,7 +49,7 @@ public class BookController {
      */
     @GetMapping("/find/id/{id}")
     public ResponseEntity<Optional<Book>> getBookById(@PathVariable String id) {
-        return ResponseEntity.ok(bookService.findById(id));
+        return ResponseEntity.ok(service.findById(id));
     }
 
     /**
@@ -64,7 +64,7 @@ public class BookController {
      */
     @PostMapping("/save")
     public ResponseEntity<Book> saveBook(@RequestBody Book book) {
-        return ResponseEntity.ok(bookService.insertBook(book));
+        return ResponseEntity.ok(service.insertBook(book));
     }
 
     /**
@@ -79,7 +79,7 @@ public class BookController {
      */
     @PutMapping("/update")
     public ResponseEntity<Book> updateBook(@RequestBody Book book) {
-        return ResponseEntity.ok(bookService.updateBook(book));
+        return ResponseEntity.ok(service.updateBook(book));
     }
     
     /**
@@ -92,7 +92,7 @@ public class BookController {
      */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteBook(@PathVariable String id) {
-        bookService.deleteById(id);
+        service.deleteById(id);
         return new ResponseEntity<>("{\"result\":\"success\"}", HttpStatus.OK);
     }
 }
