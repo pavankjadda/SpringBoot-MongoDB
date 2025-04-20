@@ -1,42 +1,42 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { Customer } from '../../models/customer';
 import { CustomerService } from '../../services/customer.service';
 
 @Component({
   selector: 'app-customer-list',
   templateUrl: './customer-list.component.html',
-  imports: [CommonModule, FormsModule],
-  standalone: true
+  imports: [CommonModule, RouterLink],
+  standalone: true,
 })
-export class CustomerListComponent {
+export class CustomerListComponent implements OnInit {
   customers: Customer[] = [];
-  searchTerm: string = '';
-  searchBy: 'firstName' | 'lastName' = 'lastName';
 
-  constructor(private customerService: CustomerService, private router: Router) {}
+  constructor(
+    private customerService: CustomerService,
+    private router: Router
+  ) {}
 
-  search(): void {
-    if (!this.searchTerm.trim()) return;
+  ngOnInit(): void {
+    this.loadCustomers();
+  }
 
-    if (this.searchBy === 'firstName') {
-      this.customerService.findByFirstName(this.searchTerm).subscribe(customer => {
-        this.customers = customer ? [customer] : [];
-      });
-    } else {
-      this.customerService.findByLastName(this.searchTerm).subscribe(customers => {
-        this.customers = customers;
+  loadCustomers(): void {
+    this.customerService
+      .getAllCustomers()
+      .subscribe((customers) => (this.customers = customers));
+  }
+
+  editCustomer(id: string): void {
+    this.router.navigate(['/edit-customer', id]);
+  }
+
+  deleteCustomer(id: string): void {
+    if (confirm('Are you sure you want to delete this customer?')) {
+      this.customerService.deleteCustomer(id).subscribe(() => {
+        this.loadCustomers();
       });
     }
-  }
-
-  editCustomer(customer: Customer): void {
-    this.router.navigate(['/edit-customer', customer.id]);
-  }
-
-  addCustomer(): void {
-    this.router.navigate(['/add-customer']);
   }
 }

@@ -17,11 +17,24 @@ import java.util.List;
 @Service
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
-    private final CustomerRepository customerRepository;
+    private final CustomerRepository repository;
 
     @Autowired
-    public CustomerServiceImpl(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public CustomerServiceImpl(CustomerRepository repository) {
+        this.repository = repository;
+    }
+
+    /**
+     * Find all customers
+     *
+     * @return List of all customers
+     *
+     * @author Pavan Kumar Jadda
+     * @since 2.1.0
+     */
+    @Override
+    public List<Customer> findAll() {
+        return repository.findAll();
     }
 
     /**
@@ -36,7 +49,7 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public Customer findByFirstName(String firstName) {
-        return customerRepository.findByFirstName(firstName);
+        return repository.findByFirstName(firstName);
     }
 
     /**
@@ -51,7 +64,7 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public List<Customer> findByLastName(String lastName) {
-        return customerRepository.findByLastName(lastName);
+        return repository.findByLastName(lastName);
     }
 
     /**
@@ -66,6 +79,6 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public Customer insert(Customer customer) {
-        return customerRepository.insert(customer);
+        return repository.insert(customer);
     }
 }

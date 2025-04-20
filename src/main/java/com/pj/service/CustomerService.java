@@ -5,6 +5,17 @@ import com.pj.model.Customer;
 import java.util.List;
 
 public interface CustomerService {
+
+    /**
+     * Find all customers
+     *
+     * @return List of all customers
+     *
+     * @author Pavan Kumar Jadda
+     * @since 2.1.0
+     */
+    List<Customer> findAll();
+
     /**
      * Find the customer by first Name
      *
@@ -40,4 +51,5 @@ public interface CustomerService {
      * @since 2.0.0
      */
     Customer insert(Customer customer);
+
 }

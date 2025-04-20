@@ -24,6 +24,19 @@ public class CustomerController {
     }
 
     /**
+     * Find all customers
+     *
+     * @return List of all customers
+     *
+     * @author Pavan Kumar Jadda
+     * @since 2.1.0
+     */
+    @GetMapping("/find/all")
+    public ResponseEntity<List<Customer>> getCustomers() {
+        return ResponseEntity.ok(service.findAll());
+    }
+
+    /**
      * Find the customer by first Name
      *
      * @param firstName The first name of the customer to be found

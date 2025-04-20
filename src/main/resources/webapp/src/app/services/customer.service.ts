@@ -4,22 +4,34 @@ import { Observable } from 'rxjs';
 import { Customer } from '../models/customer';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CustomerService {
   private apiUrl = '/api/v1/customer';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
+
+  getAllCustomers(): Observable<Customer[]> {
+    return this.http.get<Customer[]>(`${this.apiUrl}/find/all`);
+  }
 
   findByFirstName(firstName: string): Observable<Customer> {
-    return this.http.get<Customer>(`${this.apiUrl}/find/first_name/${firstName}`);
+    return this.http.get<Customer>(
+      `${this.apiUrl}/find/first_name/${firstName}`
+    );
   }
 
   findByLastName(lastName: string): Observable<Customer[]> {
-    return this.http.get<Customer[]>(`${this.apiUrl}/find/last_name/${lastName}`);
+    return this.http.get<Customer[]>(
+      `${this.apiUrl}/find/last_name/${lastName}`
+    );
   }
 
   saveCustomer(customer: Customer): Observable<Customer> {
     return this.http.post<Customer>(`${this.apiUrl}/save`, customer);
+  }
+
+  deleteCustomer(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
   }
 }
