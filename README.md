@@ -20,5 +20,6 @@ using MongoDB database.
 1. Download the project
 2. Import as Maven Project
 3. Right click on `BookStoreApplication` java class and select `run`
-4. Open browser and go to `http://localhost:8081/books.html` to see list of books
-5. You can create/update/delete books
+4. Go to  `src/main/resources/webapp` and run `npm i` install NPM dependencies
+5. Run `npm start` to start the Angular application
+6. Open your browser and go to `http://localhost:4200/` to see the application in action

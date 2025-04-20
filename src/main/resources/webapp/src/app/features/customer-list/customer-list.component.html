@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <h2>Customer List</h2>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <div class="input-group">
+        <input type="text" class="form-control" [(ngModel)]="searchTerm" placeholder="Search customers...">
+        <select class="form-select" [(ngModel)]="searchBy" style="max-width: 130px;">
+          <option value="firstName">First Name</option>
+          <option value="lastName">Last Name</option>
+        </select>
+        <button class="btn btn-primary" (click)="search()">Search</button>
+      </div>
+    </div>
+    <div class="col-md-6 text-end">
+      <button class="btn btn-primary" (click)="addCustomer()">Add New Customer</button>
+    </div>
+  </div>
+
+  <table class="table table-hover" *ngIf="customers.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers">
+        <td>{{customer.id}}</td>
+        <td>{{customer.firstName}}</td>
+        <td>{{customer.lastName}}</td>
+        <td>
+          <button class="btn btn-sm btn-primary" (click)="editCustomer(customer)">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-info" *ngIf="customers.length === 0">
+    No customers found. Try searching with a different name or add a new customer.
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="container mt-4">
+  <h2>{{isEditMode ? 'Edit' : 'Add'}} Customer</h2>
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="col-md-6">
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name</label>
+      <input type="text" class="form-control" id="firstName" formControlName="firstName">
+      <div class="text-danger" *ngIf="customerForm.get('firstName')?.invalid && customerForm.get('firstName')?.touched">
+        First Name is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last Name</label>
+      <input type="text" class="form-control" id="lastName" formControlName="lastName">
+      <div class="text-danger" *ngIf="customerForm.get('lastName')?.invalid && customerForm.get('lastName')?.touched">
+        Last Name is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary me-2" [disabled]="customerForm.invalid">Save</button>
+      <button type="button" class="btn btn-secondary" routerLink="/customers">Cancel</button>
+    </div>
+  </form>
+</div>
