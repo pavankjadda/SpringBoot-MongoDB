@@ -1,14 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Book } from '../../models/book';
 import { BookService } from '../../services/book.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-book-form',
   templateUrl: './book-form.component.html',
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
 })
 export class BookFormComponent implements OnInit {
   bookForm: FormGroup;
@@ -25,7 +30,7 @@ export class BookFormComponent implements OnInit {
       title: ['', Validators.required],
       numberOfPages: ['', [Validators.required, Validators.min(1)]],
       cost: ['', [Validators.required, Validators.min(0)]],
-      author: ['', Validators.required]
+      author: ['', Validators.required],
     });
   }
 
@@ -38,7 +43,7 @@ export class BookFormComponent implements OnInit {
   }
 
   loadBook(id: string): void {
-    this.bookService.getBookById(id).subscribe(book => {
+    this.bookService.getBookById(id).subscribe((book) => {
       this.bookForm.patchValue(book);
     });
   }

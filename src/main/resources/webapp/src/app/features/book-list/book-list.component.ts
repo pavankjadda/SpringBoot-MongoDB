@@ -1,13 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Book } from '../../models/book';
 import { BookService } from '../../services/book.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
 })
 export class BookListComponent implements OnInit {
   books: Book[] = [];

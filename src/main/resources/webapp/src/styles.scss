@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Override Bootstrap's primary color with a less blue variant
+$primary: #2e599d;  // This is a more muted, less blue color
+
+@import 'bootstrap/scss/bootstrap';
