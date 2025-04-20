@@ -47,7 +47,7 @@ public class BookController {
      * @author Pavan Kumar Jadda
      * @since 2.1.0
      */
-    @GetMapping("/find/id/{id}")
+    @GetMapping("/find/{id}")
     public ResponseEntity<Optional<Book>> getBookById(@PathVariable String id) {
         return ResponseEntity.ok(service.findById(id));
     }
@@ -81,7 +81,7 @@ public class BookController {
     public ResponseEntity<Book> updateBook(@RequestBody Book book) {
         return ResponseEntity.ok(service.updateBook(book));
     }
-    
+
     /**
      * Delete book by ID
      *

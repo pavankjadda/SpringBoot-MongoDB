@@ -2,6 +2,7 @@ package com.pj.web;
 
 import com.pj.model.Customer;
 import com.pj.service.CustomerService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -82,6 +83,22 @@ public class CustomerController {
         return ResponseEntity.ok(service.findByLastName(lastName));
     }
 
+
+    /**
+     * Update the customer
+     *
+     * @param customer an object that contains updated customer information
+     *
+     * @return Updated customer
+     *
+     * @author Pavan Kumar Jadda
+     * @since 3.0.0
+     */
+    @PutMapping("/update")
+    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer) {
+        return ResponseEntity.ok(service.updateCustomer(customer));
+    }
+
     /**
      * Save the customer information.
      *
@@ -95,5 +112,21 @@ public class CustomerController {
     @PostMapping("/save")
     public ResponseEntity<Customer> saveCustomer(@RequestBody Customer customer) {
         return ResponseEntity.ok(service.insert(customer));
+    }
+
+    /**
+     * Delete customer by ID
+     *
+     * @param id ID of the customer that needs to be deleted
+     *
+     * @return Success message
+     *
+     * @author Pavan Kumar Jadda
+     * @since 3.0.0
+     */
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteCustomer(@PathVariable String id) {
+        service.deleteById(id);
+        return new ResponseEntity<>("{\"result\":\"success\"}", HttpStatus.OK);
     }
 }

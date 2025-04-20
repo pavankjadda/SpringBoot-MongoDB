@@ -22,8 +22,8 @@ export class CustomerFormComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.customerForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required]
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]]
     });
   }
 
@@ -31,13 +31,14 @@ export class CustomerFormComponent implements OnInit {
     this.customerId = this.route.snapshot.paramMap.get('id');
     if (this.customerId) {
       this.isEditMode = true;
-      // Since we don't have a getById endpoint, we can pre-populate from state if available
-      const navigation = this.router.getCurrentNavigation();
-      const customer = navigation?.extras?.state?.['customer'];
-      if (customer) {
-        this.customerForm.patchValue(customer);
-      }
+      this.loadCustomer(this.customerId);
     }
+  }
+
+  loadCustomer(id: string): void {
+    this.customerService.getCustomerById(id).subscribe((customer) => {
+      this.customerForm.patchValue(customer);
+    });
   }
 
   onSubmit(): void {
@@ -45,11 +46,14 @@ export class CustomerFormComponent implements OnInit {
       const customer: Customer = this.customerForm.value;
       if (this.isEditMode && this.customerId) {
         customer.id = this.customerId;
+        this.customerService.updateCustomer(customer).subscribe(() => {
+          this.router.navigate(['/customers']);
+        });
+      } else {
+        this.customerService.createCustomer(customer).subscribe(() => {
+          this.router.navigate(['/customers']);
+        });
       }
-
-      this.customerService.saveCustomer(customer).subscribe(() => {
-        this.router.navigate(['/customers']);
-      });
     }
   }
 }

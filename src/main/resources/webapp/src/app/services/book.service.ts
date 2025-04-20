@@ -4,19 +4,19 @@ import { Observable } from 'rxjs';
 import { Book } from '../models/book';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BookService {
   private apiUrl = '/api/v1/book';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAllBooks(): Observable<Book[]> {
     return this.http.get<Book[]>(`${this.apiUrl}/find/all`);
   }
 
   getBookById(id: string): Observable<Book> {
-    return this.http.get<Book>(`${this.apiUrl}/find/id/${id}`);
+    return this.http.get<Book>(`${this.apiUrl}/find/${id}`);
   }
 
   createBook(book: Book): Observable<Book> {

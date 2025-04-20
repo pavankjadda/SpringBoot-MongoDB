@@ -97,4 +97,32 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer insert(Customer customer) {
         return repository.insert(customer);
     }
+
+    /**
+     * Update the customer
+     *
+     * @param customer an object that contains updated customer information
+     *
+     * @return Updated customer
+     *
+     * @author Pavan Kumar Jadda
+     * @since 3.0.0
+     */
+    @Override
+    public Customer updateCustomer(Customer customer) {
+        return repository.save(customer);
+    }
+
+    /**
+     * Delete customer by ID
+     *
+     * @param id ID of the customer that needs to be deleted
+     *
+     * @author Pavan Kumar Jadda
+     * @since 3.0.0
+     */
+    @Override
+    public void deleteById(String id) {
+        repository.deleteById(id);
+    }
 }

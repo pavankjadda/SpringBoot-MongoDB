@@ -15,6 +15,22 @@ export class CustomerService {
     return this.http.get<Customer[]>(`${this.apiUrl}/find/all`);
   }
 
+  getCustomerById(id: string): Observable<Customer> {
+    return this.http.get<Customer>(`${this.apiUrl}/find/${id}`);
+  }
+
+  createCustomer(customer: Customer): Observable<Customer> {
+    return this.http.post<Customer>(`${this.apiUrl}/save`, customer);
+  }
+
+  updateCustomer(customer: Customer): Observable<Customer> {
+    return this.http.put<Customer>(`${this.apiUrl}/update`, customer);
+  }
+
+  deleteCustomer(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
+  }
+
   findByFirstName(firstName: string): Observable<Customer> {
     return this.http.get<Customer>(
       `${this.apiUrl}/find/first_name/${firstName}`
@@ -25,13 +41,5 @@ export class CustomerService {
     return this.http.get<Customer[]>(
       `${this.apiUrl}/find/last_name/${lastName}`
     );
-  }
-
-  saveCustomer(customer: Customer): Observable<Customer> {
-    return this.http.post<Customer>(`${this.apiUrl}/save`, customer);
-  }
-
-  deleteCustomer(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
   }
 }

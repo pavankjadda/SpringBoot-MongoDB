@@ -65,4 +65,25 @@ public interface CustomerService {
      */
     Customer insert(Customer customer);
 
+    /**
+     * Update the customer
+     *
+     * @param customer an object that contains updated customer information
+     *
+     * @return Updated customer
+     *
+     * @author Pavan Kumar Jadda
+     * @since 3.0.0
+     */
+    Customer updateCustomer(Customer customer);
+
+    /**
+     * Delete customer by ID
+     *
+     * @param id ID of the customer that needs to be deleted
+     *
+     * @author Pavan Kumar Jadda
+     * @since 3.0.0
+     */
+    void deleteById(String id);
 }
